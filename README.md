@@ -2,6 +2,8 @@
 
 > Simplified Files and Directories handling
 
+[![CircleCI](https://circleci.com/gh/MagLoft/workspace/tree/master.svg?style=svg)](https://circleci.com/gh/MagLoft/workspace/tree/master)
+
 ## Description
 
 Workspace makes it a breeze to work with files and directories.
