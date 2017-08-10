@@ -1,0 +1,11 @@
+version: 2
+jobs:
+  build:
+    docker:
+       - image: circleci/ruby:2.4.1-node-browsers
+    steps:
+      - checkout
+      - run: bundle install --jobs=4 --retry=3
+      - run: bundle exec rubocop
+      - run: bundle exec rspec
+    working_directory: ~/repo
