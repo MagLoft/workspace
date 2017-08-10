@@ -89,7 +89,7 @@ module Workspace
       entries = []
       ::Dir.chdir(to_s) do
         ::Dir[glob].each do |path|
-          entry = dir(path)
+          entry = ::File.directory?(::File.join(to_s, path)) ? dir(path) : file(path)
           yield entry if block_given?
           entries.push(entry)
         end
