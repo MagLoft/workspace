@@ -1,4 +1,3 @@
 /coverage
-/modules
 /Gemfile.lock
-/workspace-*.gem
+workspace-*.gem
