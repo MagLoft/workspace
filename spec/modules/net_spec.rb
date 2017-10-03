@@ -2,7 +2,7 @@ require "workspace-net"
 
 describe Workspace::File do
   let(:root) { Workspace.tmpdir("workspace-spec") }
-  let(:local_file) { Workspace::Dir.new(Dir.pwd).file("Readme.md") }
+  let(:local_file) { Workspace::Dir.new(Dir.pwd).file("README.md") }
   let(:remote_url) { "//github.com/MagLoft/workspace/raw/master/README.md" }
   let(:remote_url_http) { "http:#{remote_url}" }
   let(:remote_url_https) { "https:#{remote_url}" }
