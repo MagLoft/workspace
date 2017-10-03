@@ -30,6 +30,10 @@ module Workspace
       type ? type.to_s : nil
     end
 
+    def size
+      ::File.size(to_s)
+    end
+
     def relative_path(relative_dir = nil)
       if relative_dir
         relative_dir = relative_dir.dir if relative_dir.class == Workspace::File
