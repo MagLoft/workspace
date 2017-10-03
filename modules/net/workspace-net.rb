@@ -11,7 +11,7 @@ module Workspace
     def queue_download(url, followlocation: true, verify: false, &block)
       uri = URI(url)
       uri.scheme ||= "http"
-      request = Typhoeus::Request.new(uri.to_s, followlocation: followlocation, verify: verify)
+      request = Typhoeus::Request.new(uri.to_s, followlocation: followlocation, ssl_verifypeer: verify, ssl_verifyhost: (verify ? 2 : 0))
       request.on_complete do |response|
         if response.success?
           write(response.body)
