@@ -58,10 +58,6 @@ module Workspace
       @contents ||= ::File.open(to_s).read
     end
 
-    def read_json
-      JSON.parse(read)
-    end
-
     def set(data)
       @contents = data
       self

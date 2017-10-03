@@ -69,9 +69,10 @@ module Workspace
     def extract_zip(target_dir)
       Zip::File.open(to_s) do |archive|
         archive.each do |entry|
-          extract_dir = target_dir.file(entry.name).dir
+          entry_name = entry.name.force_encoding("UTF-8")
+          extract_dir = target_dir.file(entry_name).dir
           extract_dir.create unless extract_dir.exists?
-          entry.extract(::File.join(target_dir.to_s, entry.name))
+          entry.extract(::File.join(target_dir.to_s, entry_name))
         end
       end
     end

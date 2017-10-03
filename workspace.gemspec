@@ -21,6 +21,6 @@ Gem::Specification.new do |s|
   s.add_development_dependency "rubocop", "~> 0.49"
   s.add_development_dependency "simplecov", "~> 0.10"
   s.add_development_dependency "simplecov-console", "~> 0.4"
-  s.files        = Dir["README.rdoc", "lib/**/*"]
+  s.files        = Dir["README.md", "lib/**/*"]
   s.require_path = 'lib'
 end

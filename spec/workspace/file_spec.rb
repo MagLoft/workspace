@@ -48,12 +48,6 @@ describe Workspace::File do
     expect(file.read).to eq("hello world")
   end
 
-  it "reads a json file" do
-    json_data = { "foo" => "bar" }
-    json_file = root.file("sample.json").write(JSON.dump(json_data))
-    expect(json_file.read_json).to eq(json_data)
-  end
-
   it "sets contents without writing" do
     file.set("hello bar")
     expect(file.read).to eq("hello bar")
