@@ -3,6 +3,18 @@ require "rmagick"
 
 module Workspace
   class File
+    def jpg?
+      ["jpg", "jpeg"].include?(extension)
+    end
+
+    def png?
+      ["png"].include?(extension)
+    end
+
+    def gif?
+      ["gif"].include?(extension)
+    end
+
     def image?
       ["jpg", "jpeg", "gif", "png"].include?(extension)
     end
@@ -44,9 +56,17 @@ module Workspace
         rename("#{basename}.jpg")
       end
       image.write(to_s) { self.quality = quality }
-      Piet.optimize(to_s, verbose: false) if optimize
+      available = (jpg? and command?("jpegoptim")) or (png? and command?("optipng"))
+      Piet.optimize(to_s, verbose: false) if optimize and available
       self
     ensure image&.destroy!
+    end
+
+    private
+
+    def command?(name)
+      `which #{name}`
+      $?.success?
     end
   end
 end

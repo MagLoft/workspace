@@ -26,9 +26,11 @@ describe Workspace::File do
 
   it "detects media file types" do
     expect(root.file("foobar.jpg").image?).to be_truthy
-    expect(root.file("foobar.jpeg").image?).to be_truthy
     expect(root.file("foobar.gif").image?).to be_truthy
     expect(root.file("foobar.png").image?).to be_truthy
+    expect(root.file("foobar.jpg").jpg?).to be_truthy
+    expect(root.file("foobar.gif").gif?).to be_truthy
+    expect(root.file("foobar.png").png?).to be_truthy
     expect(root.file("foobar.mp4").video?).to be_truthy
     expect(root.file("foobar.mp3").audio?).to be_truthy
   end
