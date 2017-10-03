@@ -17,9 +17,8 @@ module Workspace
 
     def image_size
       image = Magick::Image.read(to_s).first
-      size = { width: image.columns, height: image.rows }
-      image.destroy!
-      size
+      { width: image.columns, height: image.rows }
+    ensure image&.destroy!
     end
 
     def fit(width: nil, height: nil, quality: 85)
@@ -30,36 +29,24 @@ module Workspace
       image.change_geometry!("#{width}x^#{height}") { |cols, rows| image.thumbnail!(cols, rows) }
       image.crop!(0, 0, width, height)
       image.write(to_s) { self.quality = quality }
-      image.destroy!
       self
+    ensure image&.destroy!
     end
 
-    def optimize!(options = {})
+    def optimize!(image_max_width: nil, quality: 85, convert_jpg: true, optimize: true)
       return false if !exists? or !image?
-      optimize_png!(options) if ["png"].include?(extension)
-      optimize_jpg!(options) if ["jpg", "jpeg"].include?(extension)
-      Piet.optimize(to_s, verbose: false)
-      self
-    end
-
-    private
-
-    def optimize_jpg!(image_max_width: 2048, quality: 85)
       image = Magick::Image.read(to_s).first
-      image.change_geometry!("#{image_max_width}>x") { |cols, rows, img| img.resize!(cols, rows) } if image.columns > image_max_width
-      image.write(to_s) { self.quality = quality }
-      image.destroy!
-    end
-
-    def optimize_png!(image_max_width: 2048, quality: 85)
-      image = Magick::Image.read(to_s).first
-      image.change_geometry!("#{image_max_width}>x") { |cols, rows, img| img.resize!(cols, rows) } if image.columns > image_max_width
-      if !image.alpha? or image.resize(1, 1).pixel_color(0, 0).opacity == 0
+      if !image_max_width.nil? and image.columns > image_max_width
+        image.change_geometry!("#{image_max_width}>x") { |cols, rows, img| img.resize!(cols, rows) }
+      end
+      if mimetype == "image/png" and convert_jpg and (!image.alpha? or image.resize(1, 1).pixel_color(0, 0).opacity == 0)
         image.format = "JPG"
         rename("#{basename}.jpg")
       end
       image.write(to_s) { self.quality = quality }
-      image.destroy!
+      Piet.optimize(to_s, verbose: false) if optimize
+      self
+    ensure image&.destroy!
     end
   end
 end

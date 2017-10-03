@@ -46,5 +46,6 @@ describe Workspace::File do
   it "optimizes an image" do
     expect(image_file(:jpg).optimize!.size).to be < image_file(:jpg).size
     expect(image_file(:png).optimize!.size).to be < image_file(:png).size
+    expect(image_file(:png).optimize!(image_max_width: 100).image_size).to eq({ width: 100, height: 75 })
   end
 end
