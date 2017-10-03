@@ -98,5 +98,11 @@ module Workspace
     def delete
       FileUtils.rm_f(to_s)
     end
+
+    def stream(args = "r", &block)
+      io = ::File.open(to_s, args)
+      yield io
+      io.close
+    end
   end
 end

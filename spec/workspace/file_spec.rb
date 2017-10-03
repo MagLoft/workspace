@@ -88,4 +88,20 @@ describe Workspace::File do
     file.delete
     expect(file.exists?).to be_falsy
   end
+
+  it "streams a file for writing" do
+    file.stream("wb") do |io|
+      io.write("hello")
+      io.write("world")
+    end
+    expect(file.read).to eq("helloworld")
+  end
+
+  it "streams a file for reading" do
+    file.write("hello\nworld\n")
+    file.stream("r") do |io|
+      expect(io.readline).to eq("hello\n")
+      expect(io.readline).to eq("world\n")
+    end
+  end
 end
