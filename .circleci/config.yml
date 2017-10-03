@@ -4,6 +4,8 @@ jobs:
     docker:
        - image: circleci/ruby:2.4.1-node-browsers
     steps:
+      - run: sudo apt-get update
+      - run: sudo apt-get install jpegoptim
       - checkout
       - run: bundle install --jobs=4 --retry=3
       - run: bundle exec rubocop
