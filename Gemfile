@@ -7,4 +7,5 @@ group :test do
   gem 'workspace-parse', path: "modules/parse"
   gem 'workspace-media', path: "modules/media"
   gem 'workspace-net', path: "modules/net"
+  gem 'workspace-pdf', path: "modules/pdf"
 end
