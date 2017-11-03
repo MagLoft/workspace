@@ -1,4 +1,7 @@
 require "haml"
+require 'erb'
+require 'ostruct'
+
 module Workspace
   class File
     def read_json
@@ -12,6 +15,10 @@ module Workspace
     def read_haml(options = {})
       engine = Haml::Engine.new(read)
       engine.render(Object.new, options)
+    end
+
+    def read_erb(options = {})
+      ERB.new(::File.read(to_s)).result(OpenStruct.new(options).instance_eval { binding })
     end
   end
 end

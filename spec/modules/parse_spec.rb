@@ -20,4 +20,10 @@ describe Workspace::File do
     haml_file = root.file("sample.haml").write(haml_data)
     expect(haml_file.read_haml).to eq("<div class='main'></div>\n")
   end
+
+  it "reads a erb file" do
+    erb_data = "<title><%= title %></title>"
+    erb_file = root.file("sample.erb").write(erb_data)
+    expect(erb_file.read_erb({ title: "test" })).to eq("<title>test</title>")
+  end
 end
