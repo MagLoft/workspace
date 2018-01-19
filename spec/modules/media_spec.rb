@@ -45,6 +45,10 @@ describe Workspace::File do
     expect(image_file(:jpg).fit(width: 128).image_size).to eq({ width: 128, height: 128 })
   end
 
+  it "crops an image" do
+    expect(image_file(:jpg).crop(width: 200, height: 200).image_size).to eq({ width: 200, height: 200 })
+  end
+
   it "optimizes an image" do
     expect(image_file(:jpg).optimize!.size).to be < image_file(:jpg).size
     expect(image_file(:png).optimize!.size).to be < image_file(:png).size

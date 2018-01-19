@@ -45,6 +45,16 @@ module Workspace
     ensure image&.destroy!
     end
 
+    def crop(x: 0, y: 0, width: nil, height: nil, quality: 85)
+      width = image.columns - x if width.nil?
+      height = image.rows - y if height.nil?
+      image = Magick::Image.read(to_s).first
+      image.crop!(x, y, width, height)
+      image.write(to_s) { self.quality = quality }
+      self
+    ensure image&.destroy!
+    end
+
     def optimize!(image_max_width: nil, quality: 85, convert_jpg: true, optimize: true)
       return false if !exists? or !image?
       image = Magick::Image.read(to_s).first
