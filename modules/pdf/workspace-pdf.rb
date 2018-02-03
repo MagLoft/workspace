@@ -11,31 +11,55 @@ module Workspace
     end
 
     class Pdf
-      attr_reader :file
+      attr_reader :file, :document, :pages
 
       def initialize(file)
         @file = file
-      end
-
-      def pages
-        @doc ||= Poppler::Document.new(@file.to_s)
-        @doc.pages.map { |page| PdfPage.new(self, page) }
+        @document = Poppler::Document.new(@file.to_s)
+        @pages = @document.pages.map { |page| PdfPage.new(self, page) }
       end
 
       def export(output_dir, filename: 'page-%03d.png', width: nil, &block)
-        self.pages.each do |page|
+        pages.each do |page|
           page.export(output_dir.file(filename % page.index), { width: width }, &block)
         end
+      end
+
+      def size
+        document.size
       end
     end
 
     class PdfPage
-      attr_reader :pdf, :page, :index
+      attr_reader :pdf, :page
 
       def initialize(pdf, page)
         @pdf = pdf
         @page = page
-        @index = page.index
+      end
+
+      def index
+        page.index
+      end
+
+      def number
+        page.index + 1
+      end
+
+      def title
+        "Page #{number}"
+      end
+
+      def width
+        page.size[0]
+      end
+
+      def height
+        page.size[1]
+      end
+
+      def ratio
+        width / height
       end
 
       def export(output_file, width: nil, &block)
