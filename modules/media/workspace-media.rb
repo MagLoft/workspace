@@ -67,7 +67,7 @@ module Workspace
       end
       image.write(to_s) { self.quality = quality }
       available = (jpg? and command?("jpegoptim")) or (png? and command?("optipng"))
-      Piet.optimize(to_s, verbose: false) if optimize and available
+      Piet.optimize(to_s, verbose: false, quality: quality) if optimize and available
       self
     ensure image&.destroy!
     end

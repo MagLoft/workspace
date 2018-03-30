@@ -15,6 +15,17 @@ describe Workspace::Dir do
     root.dir("dir").compress(root.file("dir.tar.gz"))
     expect(root.file("dir.tar.gz").exists?).to eq(true)
   end
+
+  it "compresses a directory using blocks" do
+    root.dir("dir").create.file("file1.txt").write("hello world")
+    root.dir("dir").create.file("file2.txt").write("hello world")
+    root.dir("dir").compress(root.file("dir.zip")) do |path|
+      path != "file1.txt"
+    end
+    expect(root.file("dir.zip").exists?).to eq(true)
+    root.file("dir.zip").extract(root.dir("output"))
+    expect(root.dir("output").files.length).to eq 1
+  end
 end
 
 describe Workspace::File do

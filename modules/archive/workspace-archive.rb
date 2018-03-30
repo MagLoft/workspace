@@ -3,12 +3,12 @@ require 'rubygems/package'
 
 module Workspace
   class Dir
-    def compress(target_file)
+    def compress(target_file, &block)
       target_file.delete
       if target_file.extension == "gz"
-        compress_gz(target_file)
+        compress_gz(target_file, &block)
       else
-        compress_zip(target_file)
+        compress_zip(target_file, &block)
       end
       self
     end
@@ -35,7 +35,7 @@ module Workspace
       target_file
     end
 
-    def compress_zip(target_file)
+    def compress_zip(target_file, &block)
       Zip::File.open(target_file.to_s, 'w') do |zipfile|
         ::Dir["#{self}/**/**"].each do |file|
           path = file.sub("#{self}/", '')
