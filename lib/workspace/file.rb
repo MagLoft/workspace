@@ -34,6 +34,14 @@ module Workspace
       ::File.size(to_s)
     end
 
+    def align_encoding!
+      match = self.dir.files.find do |f|
+        f.name.mb_chars.normalize.to_s == self.name.mb_chars.normalize.to_s
+      end
+      self.path = match.path if match
+      self
+    end
+
     def relative_path(relative_dir = nil)
       if relative_dir
         relative_dir = relative_dir.dir if relative_dir.class == Workspace::File
