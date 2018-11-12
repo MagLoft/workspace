@@ -1,3 +1,4 @@
+require 'pry'
 require "mime/types"
 
 module Workspace
@@ -14,7 +15,11 @@ module Workspace
     end
 
     def name
-      "#{basename}.#{extension}"
+      if extension.nil? || extension.empty?
+        basename
+      else
+        "#{basename}.#{extension}"
+      end
     end
 
     def basename

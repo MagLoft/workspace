@@ -1,3 +1,4 @@
+require "pry"
 require "zip"
 require 'rubygems/package'
 
