@@ -57,6 +57,7 @@ module Workspace
 
     def optimize!(image_max_width: nil, quality: 85, convert_jpg: true, optimize: true)
       return false if !exists? or !image?
+
       image = Magick::Image.read(to_s).first
       if !image_max_width.nil? and image.columns > image_max_width
         image.change_geometry!("#{image_max_width}>x") { |cols, rows, img| img.resize!(cols, rows) }

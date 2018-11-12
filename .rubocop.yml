@@ -142,7 +142,7 @@ Lint/ParenthesesAsGroupedExpression:
 
 # This would reject is_ in front of methods
 # We use `is_supported?` everywhere already
-Style/PredicateName:
+Naming/PredicateName:
   Enabled: false
 
 # We allow the $
@@ -173,7 +173,7 @@ Style/IfInsideElse:
 Style/RescueModifier:
   Enabled: false
 
-Style/VariableNumber:
+Naming/VariableNumber:
   Enabled: false
 
 Style/ClassVars:
@@ -182,7 +182,7 @@ Style/ClassVars:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-Style/FileName:
+Naming/FileName:
   Enabled: false
 
 AllCops:
@@ -195,3 +195,9 @@ AllCops:
     - './public/**/*'
     - './bin/**/*'
     - './Gemfile'
+
+Naming/UncommunicativeMethodParamName:
+  Enabled: false
+
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
