@@ -37,7 +37,7 @@ module Workspace
 
     def compress_zip(target_file, &block)
       Zip::File.open(target_file.to_s, 'w') do |zipfile|
-        ::Dir["#{self}/**/**"].each do |file|
+        ::Dir.glob("#{self}/**/**", ::File::FNM_DOTMATCH).each do |file|
           path = file.sub("#{self}/", '')
           zipfile.add(path, file) unless block_given? and !yield(path)
         end

@@ -26,6 +26,22 @@ describe Workspace::Dir do
     root.file("dir.zip").extract(root.dir("output"))
     expect(root.dir("output").files.length).to eq 1
   end
+
+  it "includes dot-files from the directory" do
+    root.dir("dir").create.file(".nomedia").write("")
+    root.dir("dir").compress(root.file("dir.zip"))
+    expect(root.file("dir.zip").exists?).to eq(true)
+    root.file("dir.zip").extract(root.dir("output"))
+    expect(root.dir("output").file('.nomedia').exists?).to eq(true)
+  end
+
+  it "includes file without extension from the directory" do
+    root.dir("dir").create.file("nomedia").write("")
+    root.dir("dir").compress(root.file("dir.zip"))
+    expect(root.file("dir.zip").exists?).to eq(true)
+    root.file("dir.zip").extract(root.dir("output"))
+    expect(root.dir("output").file('nomedia').exists?).to eq(true)
+  end
 end
 
 describe Workspace::File do
