@@ -1,4 +1,3 @@
-require "pry"
 require "workspace"
 require "workspace/version"
 require 'rubocop/rake_task'

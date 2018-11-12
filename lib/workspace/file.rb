@@ -1,4 +1,3 @@
-require 'pry'
 require "mime/types"
 
 module Workspace

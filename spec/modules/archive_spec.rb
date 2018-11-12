@@ -1,4 +1,3 @@
-require "pry"
 require "workspace-archive"
 
 describe Workspace::Dir do
