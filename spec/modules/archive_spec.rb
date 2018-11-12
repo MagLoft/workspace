@@ -1,3 +1,4 @@
+require "pry"
 require "workspace-archive"
 
 describe Workspace::Dir do
@@ -40,6 +41,18 @@ describe Workspace::File do
     root.file("file.txt").write("hello world").compress(root.file("file.zip"))
     root.file("file.zip").extract(root.dir("output"))
     expect(root.dir("output").file("file.txt").read).to eq("hello world")
+  end
+
+  it "compresses and extracts a file without extension" do
+    root.file("FOOBAR").write("hello world").compress(root.file("file.zip"))
+    root.file("file.zip").extract(root.dir("output"))
+    expect(root.dir("output").file("FOOBAR").read).to eq("hello world")
+  end
+
+  it "compresses and extracts a file with dot-prefix" do
+    root.file(".FOOBAR").write("hello world").compress(root.file("file.zip"))
+    root.file("file.zip").extract(root.dir("output"))
+    expect(root.dir("output").file(".FOOBAR").read).to eq("hello world")
   end
 
   it "extracts a directory from tar.gz" do
