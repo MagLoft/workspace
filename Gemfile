@@ -9,3 +9,7 @@ group :test do
   gem 'workspace-net', path: "modules/net"
   gem 'workspace-pdf', path: "modules/pdf"
 end
+
+group :development do
+  gem 'rake'
+end
