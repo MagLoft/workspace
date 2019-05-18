@@ -15,11 +15,11 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '~> 2.3'
   s.required_rubygems_version = '~> 2.4'
   s.add_dependency "bundler", "< 3.0.0", ">= 1.12.0"
-  s.add_runtime_dependency "mime-types", "~> 3.1"
-  s.add_development_dependency "pry", "~> 0.10"
-  s.add_development_dependency "rspec", "~> 3.6"
-  s.add_development_dependency "rubocop", "~> 0.49"
-  s.add_development_dependency "simplecov", "~> 0.10"
+  s.add_runtime_dependency "mime-types", "~> 3.2"
+  s.add_development_dependency "pry", "~> 0.12"
+  s.add_development_dependency "rspec", "~> 3.8"
+  s.add_development_dependency "rubocop", "~> 0.69"
+  s.add_development_dependency "simplecov", "~> 0.16"
   s.add_development_dependency "simplecov-console", "~> 0.4"
   s.files        = Dir["README.md", "lib/**/*"]
   s.require_path = 'lib'
