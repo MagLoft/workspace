@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.description = "Workspace makes it a breeze to work with files and directories"
   s.required_ruby_version = '>= 2.4'
   s.add_runtime_dependency "poppler", "~> 3.3"
-  s.add_runtime_dependency "workspace", "~> 1.0"
+  s.add_runtime_dependency "workspace", "~> 2.0"
   s.files        = ["workspace-pdf.rb"]
   s.require_path = '.'
 end

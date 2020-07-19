@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.required_ruby_version = '>= 2.4'
   s.add_runtime_dependency "haml", "~> 5.0"
   s.add_runtime_dependency "psych", "~> 3.2"
-  s.add_runtime_dependency "workspace", "~> 1.0"
+  s.add_runtime_dependency "workspace", "~> 2.0"
   s.files        = ["workspace-parse.rb"]
   s.require_path = '.'
 end
