@@ -12,9 +12,9 @@ Gem::Specification.new do |s|
   s.homepage    = "https://github.com/magloft/workspace"
   s.summary     = "Workspace gem extension to allow parsing of various formats like json and yaml"
   s.description = "Workspace makes it a breeze to work with files and directories"
-  s.required_ruby_version = '~> 2.3'
-  s.required_rubygems_version = '~> 2.4'
+  s.required_ruby_version = '>= 2.4'
   s.add_runtime_dependency "haml", "~> 5.0"
+  s.add_runtime_dependency "psych", "~> 3.2"
   s.add_runtime_dependency "workspace", "~> 1.0"
   s.files        = ["workspace-parse.rb"]
   s.require_path = '.'

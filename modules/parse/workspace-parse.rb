@@ -1,6 +1,7 @@
 require "haml"
-require 'erb'
-require 'ostruct'
+require "erb"
+require "ostruct"
+require "psych"
 
 module Workspace
   class File

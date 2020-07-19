@@ -20,8 +20,7 @@ module Workspace
         relative_dir = relative_dir.dir if relative_dir.class == Workspace::File
         first = Pathname.new(relative_dir.path)
         second = Pathname.new(path)
-        result = second.relative_path_from(first).to_s
-        result
+        second.relative_path_from(first).to_s
       else
         @path.gsub(%r{^/}, "")
       end
